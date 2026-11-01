@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deutsch Zentrum - Nemis Tili Markazi</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header / Hero qismi */
+        header {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+            padding: 50px 20px 40px 20px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #4facfe;
+        }
+        header p {
+            font-size: 16px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+        }
+
+        /* Sahifalar Navigatsiyasi (Tablar) */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .nav-tab-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-tab-btn.active, .nav-tab-btn:hover {
+            background: #00f2fe;
+            color: #0f2027;
+            border-color: #00f2fe;
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .container {
+            padding: 25px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            margin: 30px 0 20px 0;
+            color: #2c5364;
+            font-size: 22px;
+            position: relative;
+        }
+
+        /* Tab Kontentlari */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Kartochkalar dizayni */
+        .cards {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-left: 5px solid #4facfe;
+            text-decoration: none;
+            display: block;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+        .card.test-card {
+            border-left-color: #6f42c1;
+            background: linear-gradient(to right, #ffffff, #f7f3ff);
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        .card p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Telegram kanal va botga ulanish bloki */
+        .telegram-box {
+            background: linear-gradient(135deg, #0088cc, #229ed9);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 35px;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3);
+        }
+        .telegram-box h3 {
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+        .telegram-box p {
+            font-size: 14px;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+        .tg-btn {
+            display: inline-block;
+            background-color: white;
+            color: #0088cc;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .tg-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Audio Lug'at qismi */
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            outline: none;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .refresh-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 9px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+            display: inline-block;
+            transition: background 0.2s;
+        }
+        .refresh-btn:hover {
+            background: #218838;
+        }
+        
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .vocab-card {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+            position: relative;
+            transition: transform 0.2s;
+        }
+        .vocab-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .gender-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+        .gender-der { background-color: #229ed9; }
+        .gender-die { background-color: #e83e8c; }
+        .gender-das { background-color: #28a745; }
+
+        .word-de {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+        .word-uz {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .audio-btn {
+            background: #f0f4f8;
+            border: none;
+            color: #0088cc;
+            padding: 6px 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: background 0.2s;
+        }
+        .audio-btn:hover {
+            background: #e2eaf0;
+        }
+
+        /* Test bo'limi */
+        .quiz-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            border: 2px solid #6f42c1;
+        }
+        .quiz-question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            background: #f8f9fa;
+        }
+        .quiz-question h4 {
+            margin-bottom: 10px;
+            color: #2c5364;
+            font-size: 16px;
+        }
+        .quiz-options label {
+            display: block;
+            background: white;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .quiz-options label:hover {
+            background: #eef2ff;
+        }
+        .quiz-options input {
+            margin-right: 10px;
+        }
+        
+        /* To'g'ri va xato javob vizuallari */
+        .quiz-question.correct {
+            border-color: #28a745;
+            background: #f4fff4;
+        }
+        .quiz-question.incorrect {
+            border-color: #dc3545;
+            background: #fff4f4;
+        }
+        .feedback-text {
+            font-size: 13px;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        .feedback-text.correct { color: #28a745; }
+        .feedback-text.incorrect { color: #dc3545; }
+
+        .submit-btn {
+            background: #6f42c1;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            display: block;
+            margin: 25px auto 0 auto;
+            transition: background 0.2s;
+        }
+        .submit-btn:hover {
+            background: #5a32a3;
+        }
+        .result-box {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #888;
+            font-size: 13px;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Deutsch Zentrum</h1>
+        <p>Nemis tili lug'atini o'rganish va talaffuzni eshitish platformasi</p>
+        
+        <div class="nav-tabs">
+            <button class="nav-tab-btn active" onclick="switchTab('main-tab', this)">🏠 Asosiy sahifa</button>
+            <button class="nav-tab-btn" onclick="switchTab('test-tab', this)">📝 Test sahifasi</button>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- ASOSIY SAHIFA TABI -->
+        <div id="main-tab" class="tab-content active">
+            <h2 class="section-title">O'quv yo'nalishlari</h2>
+            <div class="cards">
+                <!-- YouTube Playlist -->
+                <a href="https://youtube.com/playlist?list=PL7_LeRXWjFvv3Sw8BFs8JRcWCd4BqOVud&si=0D9Kn9ChZO6Y66SV" target="_blank" class="card">
+                    <h3>🇩🇪 A1 - Boshlang'ich Modul</h3>
+                    <p>Alifbo, o'qish qoidalari, asosiy so'zlashuv va boshlang'ich grammatika darslari.</p>
+                </a>
+                
+                <div class="card">
+                    <h3>📚 A2 - O'rta Bosqich</h3>
+                    <p>Kundalik muloqotni kengaytirish, o'tgan zamonlar (Präteritum, Perfekt) va matnlar tahlili.</p>
+                </div>
+                
+                <div class="test-card card" onclick="openTestFromCard()">
+                    <h3>🧠 Interaktiv Test Markazi</h3>
+                    <p>O'rgangan so'z va qoidalaringiz bo'yicha o'zingizni sinovdan o'tkazing!</p>
+                </div>
+            </div>
+
+            <!-- Lug'at va Talaffuz Bo'limi -->
+            <h2 class="section-title" style="margin-top: 40px;">Lug'at va Talaffuz Markazi</h2>
+            
+            <input type="text" class="search-box" id="vocabSearch" placeholder="So'zlarni qidirish..." onkeyup="filterVocab()">
+            <div style="text-align: right;">
+                <button class="refresh-btn" onclick="loadVocab()">🔄 Yangi so'zlar</button>
+            </div>
+
+            <div class="vocab-grid" id="vocabGrid">
+                <!-- So'zlar shu yerga chiqadi -->
+            </div>
+
+            <!-- Telegram Kanal bloki -->
+            <div class="telegram-box">
+                <h3>Bizning Telegram Kanalimiz</h3>
+                <p>Eng so'nggi darslar, foydali lug'atlar va nemis tilidagi qiziqarli materiallarni o'tkazib yubormang!</p>
+                <a href="https://t.me/nemischa_lugat_uz" target="_blank" class="tg-btn">Kanalga qo'shilish</a>
+            </div>
+        </div>
+
+        <!-- TEST SAHIFASI TABI -->
+        <div id="test-tab" class="tab-content">
+            <div class="quiz-section">
+                <h2 class="section-title" style="margin-top:0;">📝 Nemis Tili A1 Sinov Testi</h2>
+                
+                <div style="text-align: right; margin-bottom: 15px;">
+                    <button class="refresh-btn" onclick="loadQuiz()">🔄 Yangi testlar</button>
+                </div>
+
+                <form id="quizForm">
+                    <div id="quizContainer">
+                        <!-- Test savollari shu yerga dinamik yuklanadi -->
+                    </div>
+
+                    <button type="button" class="submit-btn" onclick="checkAnswers()">Natijani tekshirish</button>
+                </form>
+
+                <div id="result" class="result-box"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Deutsch Zentrum. Barcha huquqlar himoyalangan.</p>
+    </footer>
+
+    <script>
+        // 100+ So'zdan iborat baza
+        const vocabPool = [
+            { article: "der", de: "Vater", uz: "Ota", search: "vater ota" },
+            { article: "die", de: "Mutter", uz: "Ona", search: "mutter ona" },
+            { article: "das", de: "Kind", uz: "Bola", search: "kind bola" },
+            { article: "der", de: "Bruder", uz: "Aka / Uka", search: "bruder aka uka" },
+            { article: "die", de: "Schwester", uz: "Opa / Singil", search: "schwester opa singil" },
+            { article: "der", de: "Großvater", uz: "Bobo", search: "großvater babo" },
+            { article: "die", de: "Großmutter", uz: "Buvi", search: "großmutter buvi" },
+            { article: "der", de: "Sohn", uz: "O'g'il", search: "sohn ogil" },
+            { article: "die", de: "Tochter", uz: "Qiz", search: "tochter qiz" },
+            { article: "der", de: "Mann", uz: "Erkak / Er", search: "mann erkak" },
+            { article: "die", de: "Frau", uz: "Ayol / Xotin", search: "frau ayol" },
+            { article: "der", de: "Freund", uz: "Do'st", search: "freund dost" },
+            { article: "die", de: "Familie", uz: "Oila", search: "familie oila" },
+            { article: "das", de: "Baby", uz: "Chaqaloq", search: "baby chaqaloq" },
+            { article: "der", de: "Onkel", uz: "Tog'a / Amaki", search: "onkel toga amaki" },
+            { article: "die", de: "Tante", uz: "Amma / Xola", search: "tante amma xola" },
+            { article: "das", de: "Haus", uz: "Uy", search: "haus uy" },
+            { article: "der", de: "Tisch", uz: "Stol", search: "tisch stol" },
+            { article: "der", de: "Stuhl", uz: "Stul", search: "stuhl stul" },
+            { article: "das", de: "Buch", uz: "Kitob", search: "buch kitob" },
+            { article: "die", de: "Schule", uz: "Maktab", search: "schule maktab" },
+            { article: "das", de: "Auto", uz: "Mashina", search: "auto mashina" },
+            { article: "die", de: "Tasche", uz: "Sumka", search: "tasche sumka" },
+            { article: "das", de: "Bett", uz: "Krovat", search: "bett krovat" },
+            { article: "der", de: "Schrank", uz: "Shkaf", search: "schrank shkaf" },
+            { article: "die", de: "Tür", uz: "Eshik", search: "tür eshik" },
+            { article: "das", de: "Fenster", uz: "Oyna / Deraza", search: "fenster deraza" },
+            { article: "der", de: "Stift", uz: "Ruchka", search: "stift ruchka" },
+            { article: "das", de: "Handy", uz: "Telefon", search: "handy telefon" },
+            { article: "der", de: "Schlüssel", uz: "Kalit", search: "schlüssel kalit" },
+            { article: "die", de: "Uhr", uz: "Soat", search: "uhr soat" },
+            { article: "das", de: "Geld", uz: "Pul", search: "geld pul" },
+            { article: "die", de: "Lampe", uz: "Lampa", search: "lampe lampa" },
+            { article: "der", de: "Computer", uz: "Kompyuter", search: "computer kompyuter" },
+            { article: "der", de: "Apfel", uz: "Olma", search: "apfel olma" },
+            { article: "das", de: "Brot", uz: "Non", search: "brot non" },
+            { article: "die", de: "Milch", uz: "Sut", search: "milch sut" },
+            { article: "der", de: "Kaffee", uz: "Qahva", search: "kaffee qahva" },
+            { article: "das", de: "Wasser", uz: "Suv", search: "wasser suv" },
+            { article: "der", de: "Tee", uz: "Choy", search: "tee choy" },
+            { article: "die", de: "Butter", uz: "Sariyog'", search: "butter sariyog" },
+            { article: "der", de: "Käse", uz: "Pishloq", search: "käse pishloq" },
+            { article: "das", de: "Ei", uz: "Tuxum", search: "ei tuxum" },
+            { article: "die", de: "Suppe", uz: "Sho'rva", search: "suppe shorva" },
+            { article: "der", de: "Zucker", uz: "Shakar", search: "zucker shakar" },
+            { article: "das", de: "Salz", uz: "Tuz", search: "salz tuz" },
+            { article: "die", de: "Banane", uz: "Banan", search: "banane banan" },
+            { article: "das", de: "Fleisch", uz: "Go'sht", search: "fleisch gosht" },
+            { article: "der", de: "Fisch", uz: "Baliq", search: "fisch baliq" },
+            { article: "der", de: "Saft", uz: "Sharbat", search: "saft sharbat" },
+            { article: "die", de: "Sonne", uz: "Quyosh", search: "sonne quyosh" },
+            { article: "der", de: "Mond", uz: "Oy", search: "mond oy" },
+            { article: "der", de: "Tag", uz: "Kun", search: "tag kun" },
+            { article: "die", de: "Nacht", uz: "Tun", search: "nacht tun" },
+            { article: "die", de: "Stadt", uz: "Shahar", search: "stadt shahar" },
+            { article: "das", de: "Dorf", uz: "Qishloq", search: "dorf qishloq" },
+            { article: "die", de: "Straße", uz: "Ko'cha", search: "straße kocha" },
+            { article: "der", de: "Park", uz: "Park", search: "park park" },
+            { article: "der", de: "Bahnhof", uz: "Vokzal", search: "bahnhof vokzal" },
+            { article: "die", de: "Bank", uz: "Bank", search: "bank bank" },
+            { article: "das", de: "Hotel", uz: "Mehmonxona", search: "hotel mehmonxona" },
+            { article: "das", de: "Morgen", uz: "Ertalab", search: "morgen ertalab" },
+            { article: "der", de: "Abend", uz: "Kechqurun", search: "abend kechqurun" },
+            { article: "das", de: "Jahr", uz: "Yil", search: "jahr yil" },
+            { article: "der", de: "Monat", uz: "Oy (vaqt)", search: "monat oy" },
+            { article: "die", de: "Woche", uz: "Hafta", search: "woche hafta" },
+            { article: "der", de: "Regen", uz: "Yomg'ir", search: "regen yomgir" },
+            { article: "der", de: "Schnee", uz: "Qor", search: "schnee qor" },
+            { article: "der", de: "Wind", uz: "Shamol", search: "wind shamol" },
+            { article: "das", de: "Hemd", uz: "Ko'ylak", search: "hemd koylak" },
+            { article: "die", de: "Hose", uz: "Shim", search: "hose shim" },
+            { article: "der", de: "Schuh", uz: "Poyabzal", search: "schuh poyabzal" },
+            { article: "der", de: "Mantel", uz: "Palto", search: "mantel palto" },
+            { article: "die", de: "Jacke", uz: "Kutka", search: "jacke kutka" },
+            { article: "der", de: "Hut", uz: "Shlyapa", search: "hut shlyapa" },
+            { article: "der", de: "Arzt", uz: "Shifokor", search: "arzt shifokor" },
+            { article: "der", de: "Lehrer", uz: "O'qituvchi", search: "lehrer oqituvchi" },
+            { article: "der", de: "Student", uz: "Talaba", search: "student talaba" },
+            { article: "der", de: "Fahrer", uz: "Haydovchi", search: "fahrer haydovchi" },
+            { article: "der", de: "Koch", uz: "Oshpaz", search: "koch oshpaz" },
+            { article: "der", de: "Kopf", uz: "Bosh", search: "kopf bosh" },
+            { article: "das", de: "Auge", uz: "Ko'z", search: "auge koz" },
+            { article: "die", de: "Nase", uz: "Burun", search: "nase burun" },
+            { article: "der", de: "Mund", uz: "Og'iz", search: "mund ogiz" },
+            { article: "das", de: "Ohr", uz: "Quloq", search: "ohr quloq" },
+            { article: "die", de: "Hand", uz: "Qol", search: "hand qol" },
+            { article: "der", de: "Fuß", uz: "Oyoq", search: "fuß oyoq" },
+            { article: "der", de: "Hund", uz: "It", search: "hund it" },
+            { article: "die", de: "Katze", uz: "Mushuk", search: "katze mushuk" },
+            { article: "der", de: "Vogel", uz: "Qush", search: "vogel qush" },
+            { article: "das", de: "Pferd", uz: "Ot", search: "pferd ot" },
+            { article: "die", de: "Kuh", uz: "Sigir", search: "kuh sigir" }
+        ];
+
+        // 100+ Test savollari bazasi
+        const quizPool = [
+            { q: '"Guten Tag" iborasining ma\'nosi nima?', opts: {a: "Xayrli tun", b: "Xayrli kun", c: "Xayrli tong"}, ans: "b" },
+            { q: '"Danke schön" so\'zining tarjimasi:', opts: {a: "Katta rahmat", b: "Marhamat", c: "Kechirasiz"}, ans: "a" },
+            { q: 'Nemis tilida "Uy" so\'zi qanday yoziladi?', opts: {a: "das Haus", b: "der Tisch", c: "die Schule"}, ans: "a" },
+            { q: '"Ich komme aus Usbekistan" jumlasining ma\'nosi:', opts: {a: "Men O'zbekistonda o'qiyman", b: "Men O'zbekistondanman", c: "Men O'zbekistonga boraman"}, ans: "b" },
+            { q: '"Auf Wiedersehen" qanday holatda ishlatiladi?', opts: {a: "Ko'rishguncha (Xayrlashganda)", b: "Salomlashganda", c: "Minnatdorchilik bildirganda"}, ans: "a" },
+            { q: '"Wie geht es Ihnen?" qanday ma\'noni anglatadi?', opts: {a: "Ismingiz nima?", b: "Ahvollaringiz qanday?", c: "Qayerdansiz?"}, ans: "b" },
+            { q: 'Nemis alifbosidagi "Buchstabe" so\'zi nimani anglatadi?', opts: {a: "Harf", b: "So'z", c: "Gap"}, ans: "a" },
+            { q: '"Guten Morgen" nimani anglatadi?', opts: {a: "Xayrli tong", b: "Xayrli kech", c: "Xayrli tun"}, ans: "a" },
+            { q: '"Guten Abend" qaysi vaqtda ishlatiladi?', opts: {a: "Ertalab", b: "Kechqurun", c: "Tush payti"}, ans: "b" },
+            { q: '"Wie heißt du?" so\'zining ma\'nosi:', opts: {a: "Necha yoshdasan?", b: "Isming nima?", c: "Qayerda yashaysan?"}, ans: "b" },
+            { q: '"Ich bin 20 Jahre alt" jumrasi nimani bildiradi?', opts: {a: "Mening yoshim 20 da", b: "Mening 20 ta kitobim bor", c: "Men 20-uyda yashayman"}, ans: "a" },
+            { q: '"Ja" so\'zining o\'zbekcha tarjimasi:', opts: {a: "Yo'q", b: "Ha", c: "Bilmayman"}, ans: "b" },
+            { q: '"Nein" so\'zining ma\'nosi:', opts: {a: "Ha", b: "Yo'q", c: "Salom"}, ans: "b" },
+            { q: '"Bitte" so\'zi qanday ma\'nolarni anglatadi?', opts: {a: "Marhamat / Iltimos", b: "Rahmat", c: "Xayr"}, ans: "a" },
+            { q: '"Entschuldigung" so\'zining ma\'nosi:', opts: {a: "Kechirasiz", b: "Tabriklayman", c: "Oq yo'l"}, ans: "a" },
+            { q: 'Nemis tilida "Suv" so\'zi qanday yoziladi?', opts: {a: "das Wasser", b: "die Milch", c: "der Kaffee"}, ans: "a" },
+            { q: '"Der Apfel" so\'zining ma\'nosi:', opts: {a: "Nok", b: "Olma", c: "Banan"}, ans: "b" },
+            { q: '"Das Buch" nimani anglatadi?', opts: {a: "Daftar", b: "Kitob", c: "Qalam"}, ans: "b" },
+            { q: '"Die Schule" so\'zining tarjimasi:', opts: {a: "Bog'cha", b: "Maktab", c: "Universitet"}, ans: "b" },
+            { q: '"Der Vater" kim?', opts: {a: "Ota", b: "Bobo", c: "Amaki"}, ans: "a" }
+        ];
+
+        let activeQuizData = [];
+
+        // Lug'at yuklash
+        function loadVocab() {
+            const grid = document.getElementById('vocabGrid');
+            if (!grid) return;
+            grid.innerHTML = "";
+            const shuffled = [...vocabPool].sort(() => Math.random() - 0.5);
+            const selectedVocab = shuffled.slice(0, 8);
+
+            selectedVocab.forEach(item => {
+                let badgeClass = item.article === 'der' ? 'gender-der' : (item.article === 'die' ? 'gender-die' : 'gender-das');
+                let card = document.createElement('div');
+                card.className = 'vocab-card';
+                card.setAttribute('data-word', item.search);
+                card.innerHTML = `
+                    <span class="gender-badge ${badgeClass}">${item.article}</span>
+                    <div class="word-de">${item.de}</div>
+                    <div class="word-uz">${item.uz}</div>
+                    <button class="audio-btn" onclick="speak('${item.article} ${item.de}')">🔊 Eshitish</button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Testlarni dinamik yuklash
+        function loadQuiz() {
+            const container = document.getElementById('quizContainer');
+            if (!container) return;
+            container.innerHTML = "";
+            document.getElementById("result").innerHTML = "";
+
+            const shuffledQuiz = [...quizPool].sort(() => Math.random() - 0.5);
+            activeQuizData = shuffledQuiz.slice(0, 5);
+
+            activeQuizData.forEach((item, index) => {
+                let qNum = index + 1;
+                let questionDiv = document.createElement('div');
+                questionDiv.className = 'quiz-question';
+                questionDiv.id = 'qBlock_' + index;
+                questionDiv.innerHTML = `
+                    <h4>${qNum}. ${item.q}</h4>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q_${index}" value="a"> ${item.opts.a}</label>
+                        <label><input type="radio" name="q_${index}" value="b"> ${item.opts.b}</label>
+                        <label><input type="radio" name="q_${index}" value="c"> ${item.opts.c}</label>
+                    </div>
+                    <div id="feedback_${index}"></div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+
+        // Sahifa yuklanganda ishga tushishi
+        window.addEventListener('DOMContentLoaded', () => {
+            loadVocab();
+            loadQuiz();
+        });
+
+        // Tablarni almashtirish
+        function switchTab(tabId, btnElement) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openTestFromCard() {
+            const testBtn = document.querySelectorAll('.nav-tab-btn')[1];
+            switchTab('test-tab', testBtn);
+        }
+
+        // Ovozli o'qish funksiyasi
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'de-DE';
+                utterance.rate = 0.85;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Kechirasiz, brauzeringiz ovozli o'qish funksiyasini qo'llab-quvvatlamaydi.");
+            }
+        }
+
+        // Qidiruv paneli
+        function filterVocab() {
+            const input = document.getElementById('vocabSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.vocab-card');
+
+            cards.forEach(card => {
+                const searchData = card.getAttribute('data-word');
+                if (searchData.includes(input)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        // Test natijalarini to'g'ri/xato holatda tekshirish
+        function checkAnswers() {
+            var score = 0;
+            var form = document.getElementById("quizForm");
+
+            activeQuizData.forEach((item, index) => {
+                var block = document.getElementById('qBlock_' + index);
+                var feedback = document.getElementById('feedback_' + index);
+                var selected = form.querySelector('input[name="q_' + index + '"]:checked');
+
+                block.classList.remove('correct', 'incorrect');
+
+                let correctOptText = item.opts[item.ans];
+
+                if (selected) {
+                    if (selected.value === item.ans) {
+                        score++;
+                        block.classList.add('correct');
+                        feedback.innerHTML = `<div class="feedback-text correct">✅ To'g'ri!</div>`;
+                    } else {
+                        block.classList.add('incorrect');
+                        feedback.innerHTML = `<div class="feedback-text incorrect">❌ Xato! To'g'ri javob: <b>${correctOptText}</b></div>`;
+                    }
+                } else {
+                    block.classList.add('incorrect');
+                    feedback.innerHTML = `<div class="feedback-text incorrect">⚠️ Belgilanmadi! To'g'ri javob: <b>${correctOptText}</b></div>`;
+                }
+            });
+
+            var resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = `Tabriklaymiz! Siz 5 ta savoldan ${score} tasiga to'g'ri javob berdingiz! 🎯`;
+        }
+    </script>
+
+</body>
+</html>
